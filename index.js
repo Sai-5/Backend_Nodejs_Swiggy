@@ -13,7 +13,22 @@ const app = express()
 const PORT = process.env.PORT || 4000;
 
 dotEnv.config();
-app.use(cors())
+app.use(cors({
+    origin: "*"
+}))
+
+app.get('/', (req,res) => {
+    res.json({message: "CORS issue resolved"})
+})
+//     {
+//      origin: 'https://react-swiggy-vendor-backend.vercel.app',
+//      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//      allowedHeaders:['Content-Type', 'Authorization']
+//  }
+
+    
+
+
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected successfully!"))
