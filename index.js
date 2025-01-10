@@ -13,16 +13,15 @@ const app = express()
 const PORT = process.env.PORT || 4000;
 
 dotEnv.config();
-app.use(cors())
+app.use(cors({
+    origin: ["https://react-swiggy-vendor-backend.vercel.app"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials : true
+}))
 
 app.get('/', (req,res) => {
     res.json({message: "CORS issue resolved"})
 })
-//     {
-//      origin: 'https://react-swiggy-vendor-backend.vercel.app',
-//      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//      allowedHeaders:['Content-Type', 'Authorization']
-//  }
 
     
 
