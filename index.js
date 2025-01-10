@@ -13,9 +13,7 @@ const app = express()
 const PORT = process.env.PORT || 4000;
 
 dotEnv.config();
-app.use(cors({
-    origin: "*"
-}))
+app.use(cors())
 
 app.get('/', (req,res) => {
     res.json({message: "CORS issue resolved"})
