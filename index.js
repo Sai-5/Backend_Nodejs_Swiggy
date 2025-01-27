@@ -10,39 +10,31 @@ const path = require('path')
 
 const app = express()
 
-const PORT = process.env.PORT || 4000;
+
 
 dotEnv.config();
-app.use(cors({
-    origin: "https://react-swiggy-vendor-backend.vercel.app"
-}))
-
-
-    
-
+app.use(bodyParser.json());
+app.use(cors())
 
 
 mongoose.connect(process.env.MONGO_URI)
-    // {useNewUrlParser:true,
-    //     useUnifiedTopology:true
-    // }
-
     .then(() => console.log("MongoDB connected successfully!"))
-    .catch((error) => console.log("Error details:", error.message))
+    .catch((error) => console.log(error))
 
 
+const PORT = process.env.PORT || 4000;
 
-
-app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads'));
 app.use('/vendor', vendorRoutes);
 app.use('/firm', firmRoutes)
 app.use('/product', productRoutes);
-app.use('/uploads', express.static('uploads'));
 
-app.listen(PORT, () => {
-    console.log(`server started and running at ${PORT}`);
-});
+
 
 app.use('/', (req, res) => {
     res.send("<h1> Welcome to Swiggy");
+    console.log('welcome to Swiggy')
 })
+app.listen(PORT, () => {
+    console.log(`server started and running at ${PORT}`);
+});
