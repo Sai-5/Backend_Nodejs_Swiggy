@@ -14,9 +14,7 @@ const PORT = process.env.PORT || 4000;
 
 dotEnv.config();
 app.use(cors({
-    origin: ["https://react-swiggy-vendor-backend.vercel.app"],
-    methods: [ "GET", "POST", "PUT", "DELETE" ],
-    credentials : true,
+    origin: "https://react-swiggy-vendor-backend.vercel.app"
 }))
 
 
@@ -24,13 +22,13 @@ app.use(cors({
 
 
 
-mongoose.connect(process.env.MONGO_URI,
-    {useNewUrlParser:true,
-        useUnifiedTopology:true
-    }
-)
+mongoose.connect(process.env.MONGO_URI)
+    // {useNewUrlParser:true,
+    //     useUnifiedTopology:true
+    // }
+
     .then(() => console.log("MongoDB connected successfully!"))
-    .catch((error) => console.log(error))
+    .catch((error) => console.log("Error details:", error.message))
 
 
 
